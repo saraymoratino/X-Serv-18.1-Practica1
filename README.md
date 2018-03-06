@@ -3,7 +3,7 @@ Práctica 1 (Ejercicio 18.1): Web acortadora de URLs
 
 ## Enunciado
 
-Esta práctica tendrá como objetivo la creación de una aplicación web simple para acortar URLs. La aplicación funcionará únicamente con datos en memoria: se supone que cada vez que la aplicación muera y vuelva a ser lanzada, habrá perdido todo su estado anterior. La aplicación tendrá que realizarse según un esquema de clases similar al explicado en clase.
+Esta práctica tendrá como objetivo la creación de una aplicación web simple para acortar URLs. La aplicación tendrá que realizarse según un esquema de clases similar al explicado en clase.
 
 El funcionamiento de la aplicación será el siguiente:
 
