@@ -1,41 +1,15 @@
 #!/usr/bin/python3
 
-"""
-webApp class
- Root for hierarchy of classes implementing web applications
-
- Copyright Jesus M. Gonzalez-Barahona and Gregorio Robles (2009-2015)
- jgb @ gsyc.es
- TSAI, SAT and SARO subjects (Universidad Rey Juan Carlos)
- October 2009 - March 2017
-"""
-
 import socket
 
 
 class webApp:
-    """Root of a hierarchy of classes implementing web applications
+   
+    #def process(self, parsedRequest):
 
-    This class does almost nothing. Usually, new classes will
-    inherit from it, and by redefining "parse" and "process" methods
-    will implement the logic of a web application in particular.
-    """
-
-    def parse(self, request):
-        """Parse the received request, extracting the relevant information."""
-
-        return None
-
-    def process(self, parsedRequest):
-        """Process the relevant elements of the request.
-
-        Returns the HTTP code for the reply, and an HTML page.
-        """
-
-        return ("200 OK", "<html><body><h1>It works!</h1></body></html>")
+      # return ("200 OK", "<html><body><h1>It works!</h1></body></html>")
 
     def __init__(self, hostname, port):
-        """Initialize the web application."""
 
         # Create a TCP objet socket and bind it to a port
         mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,4 +36,4 @@ class webApp:
             recvSocket.close()
 
 if __name__ == "__main__":
-    testWebApp = webApp("localhost", 1234)
+    testWebApp = webApp("localhost", 4567)
