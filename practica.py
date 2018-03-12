@@ -22,9 +22,6 @@ class acortador_urls(webapp.webApp):
 		global url_number
 		
 		List = parsedRequest
-		print(List[0])
-		print(List[1])
-		print(List[2])
 		titulo = "<p><tt><i><h2 style='color:red'>URL y su URL acortada</h2></i></tt></p>"
 		if List[0] == 'GET':
 			file = open("urls.txt", "r");
