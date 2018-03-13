@@ -2,7 +2,6 @@
 
 import webapp
 
-
 def form():
 
 	answer = "<html><body>"
@@ -23,16 +22,25 @@ class acortador_urls(webapp.webApp):
 		
 		List = parsedRequest
 		titulo = "<p><tt><i><h2 style='color:red'>URL y su URL acortada</h2></i></tt></p>"
+		file = open("urls.csv", "r");
+		lines = file.read()
+		try:
+			url_number = int(lines.split("/")[-2].split("<")[0]) + 1
+			first_url = False
+		except IndexError:
+			first_url = True
+			pass # Fichero vacío
+		file.close()
 		if List[0] == 'GET':
-			file = open("urls.txt", "r");
-			lines = file.read()
-			try:
-				url_number = int(lines.split("/")[-2].split("<")[0]) + 1
-			except IndexError:
-				pass # Fichero vacío
-			file.close()
 			if List[1] == '/':
-				return ('200 OK', '<html><body>' + form() + titulo + lines + '</html></body>')
+				try:
+					separador = lines.split(',')
+					fichero = ""
+					for linea in separador:
+						fichero = fichero + linea
+				except IndexError:
+					pass
+				return ('200 OK', '<html><body>' + form() + titulo + fichero + '</html></body>')
 			else:
 				try:
 					resource = int(List[1].split("/")[1])
@@ -52,19 +60,23 @@ class acortador_urls(webapp.webApp):
 			url = List[2].split('\r\n\r\n')[1].split('=')[1]
 			if not url.startswith("http://") and not url.startswith("https://"):
 				url = "http://" + url
-			file = open("urls.txt", "r");
+			file = open("urls.csv", "r");
 			lines = file.read()
 			file.close()
 			if url not in lines:
-				file = open("urls.txt", "a")
+				file = open("urls.csv", "a")
 				short_url = "localhost:1234/" + str(url_number)
+				url = url.split(',')[0]
 				html_answer = '<a href=' + url + '>' + url + '</a>' + ' <a href=' + url + '>' + short_url + '</a><br>'
+				if not first_url:
+					file.write(',')		
 				file.write(html_answer)
 				file.close()
 				url_number += 1
 			else:
 				short_url = "localhost:1234/" + lines.split(url)[3].split("/")[1].split("<")[0]
-				html_answer = '<a href=' + url + '>' + url + '</a>' + ' ----> ' +'<a href=' + url + '>' + short_url + '</a><br>'
+				short_url = short_url.split(',')[0]
+				html_answer = '<a href=' + url + '>' + url + '</a>' +'<a href=' + url + '>' + short_url + '</a><br>'	
 			return ('200 OK', '<html><body>' + html_answer + '</html></body>')
 if __name__ == "__main__":
 	url_number = 0
